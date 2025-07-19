@@ -17,7 +17,7 @@ This project is a real-time person detection system using [YOLOv8n](https://gith
 
 ## 📷 Live Demo Screenshot
 
-![Screenshot of live detection](images/Screenshot (280).pngg)
+![Screenshot of live detection](images/Screenshot (280).png)
 
 
 ---
