@@ -1,0 +1,20 @@
+# Model files (e.g. yolov8n.pt)
+*.pt
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter Notebook checkpoints (if any)
+.ipynb_checkpoints/
+
+# VSCode settings (optional)
+.vscode/
+
+# Virtual environment
+venv/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
