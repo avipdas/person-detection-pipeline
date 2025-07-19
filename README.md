@@ -47,6 +47,7 @@ python app.py
 
 # (4) Open in browser
 http://localhost:5000
+```
 
 ## ⚙️ Tech Stack
 
