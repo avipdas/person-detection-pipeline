@@ -79,6 +79,8 @@ pip install ultralytics opencv-python filterpy
 # Run local tracker
 python tracker.py
 ```
+---
+
 ## 📝 Outputs
 
 - **`movement_log.csv`**: Logs `frame`, `track_id`, `x1`, `y1`, `x2`, `y2` (bounding box coordinates)
@@ -90,8 +92,8 @@ python tracker.py
 - **OpenCV** – real-time computer vision library  
 - **Flask** – lightweight Python web framework  
 - **YOLOv8 (Ultralytics)** – object detection model for identifying people in video frames
-- **SORT – simple object tracking (ID-based tracking)
-- **FilterPy – Kalman filter library used by SORT
-- **NumPy – matrix and array operations
-- **CSV – structured logging of movement data
-- **MP4 VideoWriter – exports annotated video
+- **SORT** – simple object tracking (ID-based tracking)
+- **FilterPy** – Kalman filter library used by SORT
+- **NumPy** – matrix and array operations
+- **CSV** – structured logging of movement data
+- **MP4** VideoWriter – exports annotated video
