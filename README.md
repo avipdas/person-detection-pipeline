@@ -49,6 +49,36 @@ python app.py
 http://localhost:5000
 ```
 
+## ✅ Week 2: Tracking & Movement Analysis
+
+- Added SORT for ID-based person tracking
+- Logs bounding box positions per frame
+- Records dwell time, entry/exit, movement paths
+- Outputs: `movement_log.csv` and `output.mp4`
+
+---
+
+## 🗂 Files
+
+| File              | Description                                  |
+|-------------------|----------------------------------------------|
+| `app.py`          | Flask app for streaming webcam detection     |
+| `tracker.py`      | Local tracking script with CSV/video output  |
+| `sort.py`         | SORT tracking algorithm                      |
+| `yolov8n.pt`      | YOLOv8n model weights (ignored in Git)       |
+| `.gitignore`      | Ignores venv, weights, cache, etc.           |
+
+---
+
+## 🚀 How to Run `tracker.py`
+
+```bash
+# Ensure dependencies are installed
+pip install ultralytics opencv-python filterpy
+
+# Run local tracker
+python tracker.py
+
 ## ⚙️ Tech Stack
 
 - **Python** – general-purpose programming language  
