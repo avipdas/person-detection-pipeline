@@ -103,6 +103,7 @@ pip install ultralytics opencv-python filterpy numpy
 
 # Run anomaly detection
 python anomaly_engine.py
+```
 
 ---
 
