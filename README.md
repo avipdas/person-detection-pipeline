@@ -112,7 +112,7 @@ python anomaly_engine.py
 - **`movement_log.csv`**: Logs `frame`, `track_id`, `x1`, `y1`, `x2`, `y2` (bounding box coordinates)
 - **`output.mp4`**: Video with tracked persons and ID annotations
 - **`anomaly_log.jsonl`**: Logs anomalies with timestamp, track ID, and type
-- **`anomaly_output.mp4: Annotated video with alert highlights`**
+- **`anomaly_output.mp4`**: Annotated video with alert highlights
 
 ## ⚙️ Tech Stack
 
