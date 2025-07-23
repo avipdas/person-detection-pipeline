@@ -23,12 +23,14 @@ This project is a real-time person detection system using [YOLOv8n](https://gith
 
 ## 🗂 Files
 
-| File              | Description                                 |
-|-------------------|---------------------------------------------|
-| `app.py`          | Main Flask app for streaming detection      |
-| `person_detector.py` | Local test script (optional/archived)     |
-| `yolov8n.pt`      | YOLOv8n model weights (ignored in Git)      |
-| `.gitignore`      | Ignores venv, model weights, cache, etc.    |
+| File                | Description                                          |
+|---------------------|------------------------------------------------------|
+| `app.py`            | Flask app for streaming webcam detection             |
+| `tracker.py`        | Local tracking script with CSV/video output          |
+| `sort.py`           | SORT tracking algorithm                              |
+| `anomaly_engine.py` | Rule engine for loitering, wrong direction, crowding |
+| `yolov8n.pt`        | YOLOv8n model weights (ignored in Git)               |
+| `.gitignore`        | Ignores venv, weights, cache, logs, etc.             |
 
 ---
 
@@ -81,10 +83,35 @@ python tracker.py
 ```
 ---
 
+## ✅ Week 3: Anomaly Detection + Rule Engine
+
+- Added `anomaly_engine.py` for real-world rule-based anomaly detection
+- Flags:
+  - **Loitering**: Track ID stays in a region for over 30 seconds
+  - **Wrong Direction**: Movement vector contradicts expected flow
+  - **Overcrowding**: More than 3 persons within a defined area
+- Saves anomalies to structured `.jsonl` logs
+- Draws alerts in red bounding boxes on screen
+- Outputs: `anomaly_log.jsonl`
+
+---
+## 🚀 How to Run `anomaly_engine.py`
+
+```bash
+# Ensure dependencies are installed
+pip install ultralytics opencv-python filterpy numpy
+
+# Run anomaly detection
+python anomaly_engine.py
+
+---
+
 ## 📝 Outputs
 
 - **`movement_log.csv`**: Logs `frame`, `track_id`, `x1`, `y1`, `x2`, `y2` (bounding box coordinates)
 - **`output.mp4`**: Video with tracked persons and ID annotations
+- **`anomaly_log.jsonl`**: Logs anomalies with timestamp, track ID, and type
+- **`anomaly_output.mp4: Annotated video with alert highlights`**
 
 ## ⚙️ Tech Stack
 
