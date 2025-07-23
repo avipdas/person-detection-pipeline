@@ -4,7 +4,9 @@
 # Python cache
 __pycache__/
 *.pyc
-*.pyo
+.env
+*.mp4
+*.jsonl
 
 # Jupyter Notebook checkpoints (if any)
 .ipynb_checkpoints/
