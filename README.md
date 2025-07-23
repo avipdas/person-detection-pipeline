@@ -62,13 +62,22 @@ http://localhost:5000
 
 ## 🗂 Files
 
-| File              | Description                                  |
-|-------------------|----------------------------------------------|
-| `app.py`          | Flask app for streaming webcam detection     |
-| `tracker.py`      | Local tracking script with CSV/video output  |
-| `sort.py`         | SORT tracking algorithm                      |
-| `yolov8n.pt`      | YOLOv8n model weights (ignored in Git)       |
-| `.gitignore`      | Ignores venv, weights, cache, etc.           |
+| File                    | Description                                                  |
+|-------------------------|--------------------------------------------------------------|
+| `app.py`                | Main Flask app to serve both stream and dashboard            |
+| `dashboard.py`          | Dash app showing anomaly graph and video                     |
+| `live_feed.py`          | Flask stream handler (imported in app.py)                    |
+| `tracker.py`            | YOLOv8 + SORT tracker, outputs CSV/video                     |
+| `anomaly_engine.py`     | Rule-based anomaly detector (loitering, wrong direction...)  |
+| `person_detector_local.py` | Standalone detection script using webcam                  |
+| `sort.py`               | SORT algorithm for tracking objects                          |
+| `movement_log.csv`      | Output CSV of bounding box movements                         |
+| `anomaly_log.jsonl`     | Structured anomaly logs per frame                            |
+| `samples_data_vtest.avi`| Sample video used for testing                                |
+| `images/`               | Contains screenshots or visual assets                        |
+| `templates/`            | Jinja2 HTML template(s) used by Flask                        |
+| `.gitignore`            | Excludes venv, cache, weights, logs, etc.                    |
+| `README.md`             | Project documentation                                        |
 
 ---
 
@@ -104,24 +113,57 @@ pip install ultralytics opencv-python filterpy numpy
 # Run anomaly detection
 python anomaly_engine.py
 ```
+---
+
+## ✅ Week 4: Dashboard & Visualization
+
+- Built a Dash-based analytics dashboard integrated with Flask
+- Dashboard displays:
+  - Embedded anomaly video (`anomaly_output.mp4`)
+  - Bar graph of anomaly type frequency from `anomaly_log.jsonl`
+  - Raw anomaly log data viewer
+- Accessible at `/dashboard/` while Flask app is running
+
+---
+
+### 📊 How to Run the Dashboard
+
+```bash
+# Install additional dependencies
+pip install dash dash-bootstrap-components pandas
+
+# Start the app (same as before)
+python app.py
+
+# Visit in browser
+http://localhost:5000/dashboard/
+```
+## 🖼 Dashboard Preview
+
+Includes video playback, bar chart of anomaly types, and a raw log viewer.
+
+| Video Playback | Anomaly Log Chart |
+|----------------|-------------------|
+| ![Video](images/Dashboard1.png) | ![Chart](images/Dashboard2.png) |
 
 ---
 
 ## 📝 Outputs
 
-- **`movement_log.csv`**: Logs `frame`, `track_id`, `x1`, `y1`, `x2`, `y2` (bounding box coordinates)
-- **`output.mp4`**: Video with tracked persons and ID annotations
-- **`anomaly_log.jsonl`**: Logs anomalies with timestamp, track ID, and type
-- **`anomaly_output.mp4`**: Annotated video with alert highlights
+- **`movement_log.csv`**: Logs `frame`, `track_id`, `x1`, `y1`, `x2`, `y2` for each detection box
+- **`anomaly_log.jsonl`**: Anomalies with `timestamp`, `track_id`, and `type` (e.g., loitering)
+- **`output.mp4`** *(if saved)*: Video with tracked persons and ID overlays
+- **`anomaly_output.mp4`** *(if generated)*: Video with anomaly alerts highlighted
 
 ## ⚙️ Tech Stack
 
-- **Python** – general-purpose programming language  
-- **OpenCV** – real-time computer vision library  
-- **Flask** – lightweight Python web framework  
-- **YOLOv8 (Ultralytics)** – object detection model for identifying people in video frames
-- **SORT** – simple object tracking (ID-based tracking)
-- **FilterPy** – Kalman filter library used by SORT
-- **NumPy** – matrix and array operations
-- **CSV** – structured logging of movement data
-- **MP4** VideoWriter – exports annotated video
+- **Python** – main programming language  
+- **OpenCV** – video capture, frame processing, drawing overlays  
+- **Flask** – serves live video streams and dashboard UI  
+- **YOLOv8 (Ultralytics)** – real-time person detection model  
+- **SORT** – tracking algorithm for consistent ID assignment  
+- **FilterPy** – supports Kalman filter in SORT  
+- **NumPy** – array/math operations for detection logic  
+- **CSV & JSONL** – structured logging for movement and anomalies  
+- **MP4 (OpenCV VideoWriter)** – saves annotated video output  
+- **Jinja2 (via Flask)** – for rendering dashboard HTML templates
